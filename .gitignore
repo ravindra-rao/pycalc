@@ -1,5 +1,8 @@
 /.mypy_cache/
-/env/
 .project
 .pydevproject
 .settings
+/env/
+__pycache__
+/build/
+/setuptoolsdemo.egg-info/
