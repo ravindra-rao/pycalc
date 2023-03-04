@@ -5,4 +5,5 @@
 /env/
 __pycache__
 /build/
-/setuptoolsdemo.egg-info/
+/pycalc.egg-info/
+/dist/
