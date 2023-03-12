@@ -7,14 +7,16 @@ jobs:
       - image: "circleci/python:3.6.4"
     steps:
       - checkout
-      - run: python -m yopycalc.calc
+      # - run: python -m yopycalc.calc
+      - run: python yopycalc/calc.py
   test:
     working_directory: ~/circleci-python
     docker:
       - image: "circleci/python:3.6.4"
     steps:
       - checkout
-      - run: python -m test.test_calc
+      # - run: python -m test.test_calc
+      - run: python test/test_calc.py
 
 workflows:
   build_and_test:
