@@ -62,7 +62,7 @@ workflows:
       - pypi_publish:
           requires:
             - test_pypi_publish
-          filters:
-            branches:
-              only:
-                - master
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
