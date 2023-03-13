@@ -1,0 +1,68 @@
+version: 2.1
+
+jobs:
+  build_test:
+    working_directory: ~/circleci-python
+    docker:
+      - image: cimg/python:3.11.0
+    steps:
+      -  checkout # checkout source code to working directory
+      - run: 
+          command: | # install dependencies using pip and create whl
+            pip install wheel
+            python -m yopycalc.calc
+            python setup.py sdist bdist_wheel
+      - run:
+          command: | # Run test suite
+            python -m test.test_calc
+  test_pypi_publish:
+    working_directory: ~/circleci-python
+    docker:
+      - image: cimg/python:3.11.0
+    steps:
+      -  checkout # checkout source code to working directory
+      - run: 
+          command: |  # install wheel & twine, create whl and publish to Test PyPI
+            pip install wheel
+            python -m yopycalc.calc
+            python setup.py sdist bdist_wheel
+            pip install twine
+            twine upload -u yodragon -p Yodragon@123 --repository-url https://test.pypi.org/legacy/ dist/*
+      - run:
+          command: | # Run test suite
+            python -m test.test_calc
+  pypi_publish:
+    working_directory: ~/circleci-python
+    docker:
+      - image: cimg/python:3.11.0
+    steps:
+      -  checkout # checkout source code to working directory
+      - run: 
+          command: |  # install wheel & twine, create whl and publish to PyPI
+            pip install wheel
+            python -m yopycalc.calc
+            python setup.py sdist bdist_wheel
+            pip install twine
+            twine upload -u yodragon -p Yodragon@123 --repository-url https://upload.pypi.org/legacy/ dist/*
+      - run:
+          command: | # Run test suite
+            python -m test.test_calc
+
+workflows:
+  build_test_publish:
+    jobs:
+      - build_test
+      - test_pypi_publish:
+          requires:
+            - build_test
+          filters:
+            branches:
+              only:
+                - develop
+      - pypi_publish:
+          requires:
+            - build_test
+          filters:
+            branches:
+              only:
+                - main
