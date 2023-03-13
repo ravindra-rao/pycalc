@@ -43,7 +43,7 @@ jobs:
             python -m yopycalc.calc
             python setup.py sdist bdist_wheel
             pip install twine
-            twine upload -u yodragon -p Yodragon@123 --repository-url https://upload.pypi.org/legacy/ dist/*
+            twine upload -u yodragon -p Yodragon@123 --verbose --repository-url https://upload.pypi.org/legacy/ dist/*
       - run:
           command: | # Run test suite
             python -m test.test_calc
