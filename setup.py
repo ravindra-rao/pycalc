@@ -4,7 +4,7 @@ import setuptools
 setuptools.setup(
     include_package_data=True, 
     name='yopycalc', 
-    version='0.0.3.2', 
+    version='0.0.3.3', 
     description='yopycalc python module',
     url='https://github.com/ravindra-rao/setuptoolsdemo.git',
     author='yobro',
