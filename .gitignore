@@ -3,3 +3,8 @@
 .project
 .pydevproject
 .settings
+__pycache__
+/build/
+/dist/
+/yopycalc.egg-info/
+
